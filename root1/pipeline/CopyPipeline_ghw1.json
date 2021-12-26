@@ -1,0 +1,94 @@
+{
+	"name": "CopyPipeline_ghw1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy_ghw",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "blobfilecontainer//Screenshot (60).png"
+					},
+					{
+						"name": "Destination",
+						"value": "blobfilecontainer//Screenshot (60).png"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"additionalColumns": [
+							{
+								"name": "cloume",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"maxConcurrentConnections": 2,
+							"recursive": true,
+							"modifiedDatetimeStart": "2021-12-26T12:19:00.000Z",
+							"modifiedDatetimeEnd": "2021-12-28T02:15:18.000Z",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 3
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"maxConcurrentConnections": 2,
+							"blockSizeInMB": 12
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "setOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"validateDataConsistency": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"type": "String",
+									"ordinal": 1
+								},
+								"sink": {
+									"path": "$['Column1']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_ghw",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_ghw",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

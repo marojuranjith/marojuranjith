@@ -1,0 +1,23 @@
+{
+	"name": "DestinationDataset_ghw",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Screenshot (60).png",
+				"container": "blobfilecontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\"",
+			"firstRowAsHeader": false
+		},
+		"schema": {}
+	}
+}
